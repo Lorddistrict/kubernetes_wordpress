@@ -1,0 +1,104 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2021-06-16T09:58:18Z"
+  labels:
+    run: mysql
+  name: mysql
+  namespace: default
+  resourceVersion: "20203"
+  uid: fd339146-f471-4cea-9146-0875ed590cc5
+spec:
+  containers:
+    - image: mysql:5.7
+      imagePullPolicy: IfNotPresent
+      name: mysql
+      ports:
+        - containerPort: 3306
+          protocol: TCP
+      resources: { }
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-49tkw
+          readOnly: true
+      env:
+        - name: MYSQL_DATABASE
+          value: exampledb
+        - name: MYSQL_USER
+          value: exampleuser
+        - name: MYSQL_PASSWORD
+          value: examplepass
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: '1'
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: minikube
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: { }
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+  volumes:
+    - name: default-token-49tkw
+      secret:
+        defaultMode: 420
+        secretName: default-token-49tkw
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2021-06-16T09:58:18Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2021-06-16T09:58:18Z"
+      message: 'containers with unready status: [mysql]'
+      reason: ContainersNotReady
+      status: "False"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2021-06-16T09:58:18Z"
+      message: 'containers with unready status: [mysql]'
+      reason: ContainersNotReady
+      status: "False"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2021-06-16T09:58:18Z"
+      status: "True"
+      type: PodScheduled
+  containerStatuses:
+    - containerID: docker://9f07a9a067de9deb57f984b2276cae4b71d53d2a4b8a20fbd3e236713d90fee0
+      image: mysql:5.7
+      imageID: docker-pullable://mysql@sha256:a682e3c78fc5bd941e9db080b4796c75f69a28a8cad65677c23f7a9f18ba21fa
+      lastState: { }
+      name: mysql
+      ready: false
+      restartCount: 0
+      started: false
+      state:
+        terminated:
+          containerID: docker://9f07a9a067de9deb57f984b2276cae4b71d53d2a4b8a20fbd3e236713d90fee0
+          exitCode: 1
+          finishedAt: "2021-06-16T09:58:19Z"
+          reason: Error
+          startedAt: "2021-06-16T09:58:19Z"
+  hostIP: 192.168.49.2
+  phase: Failed
+  podIP: 172.17.0.4
+  podIPs:
+    - ip: 172.17.0.4
+  qosClass: BestEffort
+  startTime: "2021-06-16T09:58:18Z"
