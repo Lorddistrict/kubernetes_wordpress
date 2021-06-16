@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: wordpress
+  name: wordpress
+spec:
+  clusterIP: 10.102.55.68
+  clusterIPs:
+  - 10.102.55.68
+  externalTrafficPolicy: Cluster
+  ports:
+  - nodePort: 31229
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: wordpress
+  sessionAffinity: None
+  type: NodePort
