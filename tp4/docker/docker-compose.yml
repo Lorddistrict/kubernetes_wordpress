@@ -1,0 +1,37 @@
+---
+version: '3.4'
+
+services:
+  wp-app:
+    image: wordpress:5.7
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: wp-db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    networks:
+      - wp-net
+    volumes:
+      - wpapp_data:/var/www/html
+  wp-db:
+    image: mysql:5.7
+    ports:
+      - 3307:3306
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampledb
+      MYSQL_PASSWORD: exampledb
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    networks:
+      - wp-net
+    volumes:
+      - wpdb_data:/var/lib/mysql
+
+networks:
+  wp-net:
+
+volumes:
+  wpapp_data:
+  wpdb_data:
