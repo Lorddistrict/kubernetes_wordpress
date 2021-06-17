@@ -33,16 +33,19 @@ spec:
           env:
             - name: MYSQL_DATABASE
               valueFrom:
+                #secretKeyRef:
                 configMapKeyRef:
                   name: blog-access
                   key: BLOG_DB_NAME
             - name: MYSQL_USER
               valueFrom:
+                #secretKeyRef:
                 configMapKeyRef:
                   name: blog-access
                   key: BLOG_DB_USERNAME
             - name: MYSQL_PASSWORD
               valueFrom:
+                #secretKeyRef:
                 configMapKeyRef:
                   name: blog-access
                   key: BLOG_DB_PASSWORD
